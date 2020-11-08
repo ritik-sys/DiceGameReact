@@ -7,15 +7,18 @@ function Dice() {
     const [DiceQuantity, setDiceQuantity] = useState(1);
     const [FaceQuantity, setFaceQuantity] = useState(2);
     const [result, setResult] = useState([])
-
+    const [sum, setSum] = useState(0)
+    var x = 0;
     const getResult = (e) => {
         e.preventDefault();
         for (var i = 1; i <= DiceQuantity; i++) {
             var outcome = Math.floor(Math.random() * (FaceQuantity - 1 + 1)) + 1;
             outcomes.push(outcome)
+            x = x + outcome
             count.push(i)
             setResult(outcomes)
         }
+        setSum(x)
         console.log(outcomes);
     }
 
@@ -48,9 +51,10 @@ function Dice() {
                 {result.map((x) => (
                     <RollDie outcome={x} />
                 ))}
-
             </div>
-
+            <div className="d-flex justify-content-center">
+                {sum != 0 && <button type="button" class="btn btn-success btn-lg m-5"><h1>Sum of All Outcomes : {sum}</h1></button>}
+            </div>
         </div>
     );
 }
